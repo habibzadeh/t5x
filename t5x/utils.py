@@ -1297,7 +1297,9 @@ def create_orbax_checkpoint_manager(
       # differently since it's a functools.partial.
       extra_kwargs = _get_default_args(cfg.checkpointer_cls)
     else:
-      if issubclass(cfg.checkpointer_cls, checkpoints.SaveBestCheckpointer):
+      if issubclass(
+          type(cfg.checkpointer_cls), checkpoints.SaveBestCheckpointer
+      ):
         extra_kwargs = _get_default_args(cfg.checkpointer_cls.__init__)
     return extra_kwargs
 
